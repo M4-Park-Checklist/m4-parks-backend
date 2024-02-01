@@ -1,0 +1,11 @@
+#### Updates Made -
+- Type of change:
+- Database/Migrations: 
+- Routes:
+- Models:
+- Controllers:
+- API/JSON:
+- Testing:
+  - Models:
+  - Features:
+- Considerations(Extra notes, refactors, etc.):
