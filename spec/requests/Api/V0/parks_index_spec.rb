@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Api::V0::Parks', type: :request do
   describe 'happy path' do
-    it 'returns a list of parks' do
+    it 'returns a list of parks', :vcr do
       get '/api/v0/parks'
 
       expect(response).to be_successful
@@ -11,7 +11,7 @@ RSpec.describe 'Api::V0::Parks', type: :request do
       parks = JSON.parse(response.body, symbolize_names: true)
 
       require 'pry'; binding.pry
-      
+
       expect(parks).to be_a(Hash)
       expect(parks).to have_key(:data)
       expect(parks).to have_key(:type)
