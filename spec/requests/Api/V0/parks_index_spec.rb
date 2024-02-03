@@ -34,6 +34,8 @@ RSpec.describe 'Api::V0::Parks', type: :request do
         expect(attributes[:designation]).to be_a(String)
         expect(attributes).to have_key(:description)
         expect(attributes[:description]).to be_a(String)
+        expect(attributes).to have_key(:park_code)
+        expect(attributes[:park_code]).to be_a(String)
         expect(attributes).to have_key(:states)
         expect(attributes[:states]).to be_a(String)
         expect(attributes).to have_key(:media)

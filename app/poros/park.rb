@@ -3,6 +3,7 @@ class Park
               :name,
               :designation,
               :description, 
+              :park_code,
               :states, 
               :media,  
               :active_alerts, 
@@ -16,6 +17,7 @@ class Park
     @name = data[:fullName]
     @designation = data[:designation]
     @description = data[:description]
+    @park_code = data[:parkCode]
     @states = data[:states]
     @media = data[:images]
     @single_park = single_park

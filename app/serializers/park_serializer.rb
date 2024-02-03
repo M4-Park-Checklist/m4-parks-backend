@@ -4,6 +4,7 @@ class ParkSerializer
               :name,
               :designation,
               :description,
+              :park_code,
               :states,
               :media,
               :active_alerts,
