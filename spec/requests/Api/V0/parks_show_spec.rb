@@ -1,20 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe 'Api::V0::Parks', type: :request do
-  describe 'index requests' do
+  describe 'show requests' do
     describe 'happy path' do
-      it 'returns a list of parks', :vcr do
-        get '/api/v0/parks'
+      it 'returns a single park', :vcr do
+        get '/api/v0/parks/acad'
 
-        expect(response).to be_successful
+        expect(response).to be_successful 
         expect(response.status).to eq(200)
 
-        parks = JSON.parse(response.body, symbolize_names: true)
+        body = JSON.parse(response.body, symbolize_names: true)
 
-        expect(parks).to be_a(Hash)
-        expect(parks).to have_key(:data)
+        expect(body).to be_a(Hash)
+        expect(body).to have_key(:data)
 
-        park = parks[:data][0]
+        park = body[:data]
 
         expect(park).to be_a(Hash)
         expect(park).to have_key(:id)
@@ -39,15 +39,15 @@ RSpec.describe 'Api::V0::Parks', type: :request do
         expect(attributes).to have_key(:media)
         expect(attributes[:media]).to be_a(Array)
         expect(attributes).to have_key(:active_alerts)
-        expect(attributes[:active_alerts]).to be_nil
+        expect(attributes[:active_alerts]).to be_a(Array)
         expect(attributes).to have_key(:things_to_do)
-        expect(attributes[:things_to_do]).to be_nil
+        expect(attributes[:things_to_do]).to be_a(Array)
         expect(attributes).to have_key(:amenities)
-        expect(attributes[:amenities]).to be_nil
+        expect(attributes[:amenities]).to be_a(Array)
         expect(attributes).to have_key(:hours_of_operation)
-        expect(attributes[:hours_of_operation]).to be_nil
+        expect(attributes[:hours_of_operation]).to be_a(Hash)
         expect(attributes).to have_key(:current_weather)
-        expect(attributes[:current_weather]).to be_nil
+        expect(attributes[:current_weather]).to be_a(Hash)
       end
     end
   end
