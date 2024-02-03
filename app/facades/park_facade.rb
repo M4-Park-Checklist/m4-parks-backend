@@ -3,7 +3,8 @@ class ParkFacade
     parks = ParkService.get_parks[:data]
 
     parks.map do |park|
-      Park.new(park)
+      p = Park.new(park)
+      require 'pry'; binding.pry
     end
   end
 end
