@@ -7,26 +7,26 @@ class Park
               :media,  
               :active_alerts, 
               :things_to_do, 
-              :ammenities, 
-              :campgrounds, 
-              :events,  
+              :amenities, 
               :hours_of_operation, 
-              :weather
+              :current_weather
   
-  def initialize(data)
+  def initialize(data, single_park = false)
     @id = data[:id]
     @name = data[:fullName]
     @designation = data[:designation]
     @description = data[:description]
     @states = data[:states]
     @media = data[:images]
-    @active_alerts = data[:alerts] # need to build
-    @things_to_do = self.get_things_to_do(data[:activities])
-    @ammenities = data[:amenities] # need to build
-    @campgrounds = data[:campgrounds] # need to build
-    @events = data[:events] # need to build
-    @hours_of_operation = self.get_hours_of_operation(data[:operatingHours])
-    @weather = self.get_weather(data[:addresses])
+    @single_park = single_park
+    
+    if @single_park == true
+      @active_alerts = self.get_active_alerts(data)
+      @things_to_do = self.get_things_to_do(data[:activities])
+      @amenities = self.get_amenities(data)
+      @hours_of_operation = self.get_hours_of_operation(data[:operatingHours])
+      @current_weather = self.get_weather(data[:addresses])
+    end
   end
 
   private
@@ -48,6 +48,31 @@ class Park
   end
 
   def get_weather(addresses)
-    WeatherService.get_weather(addresses)
+    weather = WeatherService.get_weather(addresses)
+    weather[:data][:attributes][:current_weather]
+  end
+
+  def get_active_alerts(data)
+    alerts = ParkService.get_alerts(data[:parkCode])
+    
+    alert_summary = []
+    
+    alerts[:data].each do |alert|
+      alert_summary << alert[:title]
+    end
+    
+    alert_summary
+  end
+
+  def get_amenities(data)
+    amenities = ParkService.get_amenities(data[:parkCode])
+
+    amenity_summary = []
+    
+    amenities[:data].each do |amenity|
+      amenity_summary << amenity[:name]
+    end
+    
+    amenity_summary.uniq
   end
 end

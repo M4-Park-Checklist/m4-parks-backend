@@ -4,7 +4,11 @@ class ParkFacade
 
     parks.map do |park|
       p = Park.new(park)
-      require 'pry'; binding.pry
     end
+  end
+
+  def self.get_park(park_code)
+    park = ParkService.get_park(park_code)[:data]
+    Park.new(park, true)
   end
 end

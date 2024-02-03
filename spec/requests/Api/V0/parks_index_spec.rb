@@ -10,30 +10,43 @@ RSpec.describe 'Api::V0::Parks', type: :request do
 
       parks = JSON.parse(response.body, symbolize_names: true)
 
-      require 'pry'; binding.pry
-
       expect(parks).to be_a(Hash)
       expect(parks).to have_key(:data)
-      expect(parks).to have_key(:type)
-      expect(parks[:type]).to eq('parks')
-      expect(parks[:data]).to be_an(Array)
-      expect(parks[:data][0]).to have_key(:id)
-      expect(parks[:data][0][:id]).to be_a(String)
-      expect(parks[:data][0]).to have_key(:attributes)
 
-      # fullName
-      # id
-      # statecode(from the address block?)
-      # media(not sure how this one is managed, but id love to be able to have like, 5 pictures from a park and a video?)
-      # recent news (can just be the most recent entry in the news fetch)
-      # active alerts
-      # things to do (like 3 items)
-      # amenities
-      # campgrounds
-      # events
-      # activities
-      # Hours of operation
-      # weather(think you guys have this handled already?)
+      park = parks[:data][0]
+
+      expect(park).to be_a(Hash)
+      expect(park).to have_key(:id)
+      expect(park[:id]).to be_a(String)
+      expect(park).to have_key(:type)
+      expect(park[:type]).to eq('park')
+      expect(park).to have_key(:attributes)
+      
+      attributes = park[:attributes]
+
+      expect(attributes).to be_a(Hash)
+      expect(attributes).to have_key(:id)
+      expect(attributes[:id]).to be_a(String)
+      expect(attributes).to have_key(:name)
+      expect(attributes[:name]).to be_a(String)
+      expect(attributes).to have_key(:designation)
+      expect(attributes[:designation]).to be_a(String)
+      expect(attributes).to have_key(:description)
+      expect(attributes[:description]).to be_a(String)
+      expect(attributes).to have_key(:states)
+      expect(attributes[:states]).to be_a(String)
+      expect(attributes).to have_key(:media)
+      expect(attributes[:media]).to be_a(Array)
+      expect(attributes).to have_key(:active_alerts)
+      expect(attributes[:active_alerts]).to be_nil
+      expect(attributes).to have_key(:things_to_do)
+      expect(attributes[:things_to_do]).to be_nil
+      expect(attributes).to have_key(:amenities)
+      expect(attributes[:amenities]).to be_nil
+      expect(attributes).to have_key(:hours_of_operation)
+      expect(attributes[:hours_of_operation]).to be_nil
+      expect(attributes).to have_key(:current_weather)
+      expect(attributes[:current_weather]).to be_nil
     end
   end
 end
