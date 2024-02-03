@@ -1,10 +1,10 @@
 class Park
   attr_reader :id, 
-              :name, 
+              :name,
+              :designation,
               :description, 
               :states, 
-              :media, 
-              :recent_news, 
+              :media,  
               :active_alerts, 
               :things_to_do, 
               :ammenities, 
@@ -16,16 +16,17 @@ class Park
   def initialize(data)
     @id = data[:id]
     @name = data[:fullName]
+    @designation = data[:designation]
     @description = data[:description]
     @states = data[:states]
     @media = data[:images]
-    @active_alerts = data[:alerts] # may need to consume new endpoint
+    @active_alerts = data[:alerts] # need to build
     @things_to_do = self.get_things_to_do(data[:activities])
-    @ammenities = data[:amenities]
-    @campgrounds = data[:campgrounds]
-    @events = data[:events]
+    @ammenities = data[:amenities] # need to build
+    @campgrounds = data[:campgrounds] # need to build
+    @events = data[:events] # need to build
     @hours_of_operation = self.get_hours_of_operation(data[:operatingHours])
-    @weather = data[:weather]
+    @weather = self.get_weather(data[:addresses])
   end
 
   private
@@ -44,5 +45,9 @@ class Park
       hours_hash[hours[:name]] = hours[:standardHours]
     end
     hours_hash
+  end
+
+  def get_weather(addresses)
+    WeatherService.get_weather(addresses)
   end
 end
