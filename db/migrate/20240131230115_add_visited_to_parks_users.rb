@@ -1,5 +1,5 @@
 class AddVisitedToParksUsers < ActiveRecord::Migration[7.1]
   def change
-    add_column :user_parks, :visited, :boolean
+    add_column :user_parks, :visited, :boolean, default: false
   end
 end
