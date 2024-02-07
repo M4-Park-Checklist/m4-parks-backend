@@ -1,4 +1,4 @@
-class Park
+class Parksite
   attr_reader :id, 
               :name,
               :designation,

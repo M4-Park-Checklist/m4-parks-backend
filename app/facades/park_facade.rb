@@ -3,13 +3,13 @@ class ParkFacade
     parks = ParkService.get_parks[:data]
 
     parks.map do |park|
-      p = Park.new(park)
+      p = Parksite.new(park)
     end
   end
 
   def self.get_park(park_code)
     park = ParkService.get_park(park_code)[:data].first
 
-    Park.new(park, true)
+    Parksite.new(park, true)
   end
 end
