@@ -10,9 +10,7 @@ class Api::V0::ParksController < ApplicationController
   end
 
   def show
-    if params[:id].nil?
-      render json: {error: "Invalid park id"}, status: 400
-    elsif params[:id].length != 4
+    if params[:id].length != 4
       render json: {error: "Invalid park id"}, status: 400      
     else
       render json: ParkSerializer.new(ParkFacade.get_park(params[:id]))
