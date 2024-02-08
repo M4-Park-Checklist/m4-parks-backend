@@ -2,7 +2,7 @@ name: m4-parks-be
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [ci_test_base, main]
 
 jobs:
   tests:
@@ -41,10 +41,7 @@ jobs:
           DB_PASSWORD: postgres
         run: bundle exec rspec
 
-      # - name: Test
-      #   run: |
-      #     npm install
-      #     npm run test
+      # A SMALL CHANGE TO TEST CI/CD
 
       # - name: Deploy
       #   # Only run this step if the branch is main
