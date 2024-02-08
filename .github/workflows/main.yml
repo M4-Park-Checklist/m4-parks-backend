@@ -1,24 +1,55 @@
-# .github/workflows/ci.yml
-
+name: m4-parks-be
 on:
   pull_request:
   push:
     branches: [main]
 
 jobs:
-  ci:
+  tests:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+      - name: Install dependencies
+        run: bundle install
+      - name: Setup Database
+        env:
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+        run: |
+          bin/rails db:create
+          bin/rails db:schema:load
+      - name: Run RSpec Tests
+        env:
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+        run: bundle exec rspec
+
       # - name: Test
       #   run: |
       #     npm install
       #     npm run test
 
-      - name: Deploy
-        # Only run this step if the branch is main
-        if: github.ref == 'refs/heads/main'
-        env:
-          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-        run: |
-          curl "$deploy_url"
+      # - name: Deploy
+      #   # Only run this step if the branch is main
+      #   if: github.ref == 'refs/heads/main'
+      #   env:
+      #     deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+      #   run: |
+      #     curl "$deploy_url"
