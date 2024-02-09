@@ -52,5 +52,18 @@ RSpec.describe 'Api::V0::Parks', type: :request do
         expect(attributes[:current_weather]).to be_nil
       end
     end
+
+    describe 'sad path' do
+      it 'returns an error if the request is invalid', :vcr do
+        allow(ParkFacade).to receive(:get_parks).and_return([])
+
+        get '/api/v0/parks'
+        expect(response).to_not be_successful
+        
+        expect(response.status).to eq(404)
+
+        expect(response.body).to eq("{\"error\":\"No parks found\"}")
+      end
+    end
   end
 end

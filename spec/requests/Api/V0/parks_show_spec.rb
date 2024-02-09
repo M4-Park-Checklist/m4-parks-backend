@@ -52,5 +52,15 @@ RSpec.describe 'Api::V0::Parks', type: :request do
         expect(attributes[:current_weather]).to be_a(Hash)
       end
     end
+
+    describe 'sad path' do
+      it 'errors if the park id is invalid', :vcr do
+        get '/api/v0/parks/123'
+
+        expect(response).to_not be_successful
+        expect(response.status).to eq(400)
+        expect(response.body).to eq("{\"error\":\"Invalid park id\"}")
+      end
+    end
   end
 end
