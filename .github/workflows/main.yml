@@ -19,8 +19,6 @@ jobs:
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           POSTGRES_DATABASE: postgres
           POSTGRES_HOST: localhost
-        run: |
-          sudo systemctl start postgresql.service
 
     steps:
       - name: Checkout code
@@ -43,6 +41,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         run: |
+          sudo systemctl start postgresql.service
           bin/rails db:create
           bin/rails db:schema:load
 
