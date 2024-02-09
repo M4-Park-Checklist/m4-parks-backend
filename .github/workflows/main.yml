@@ -10,15 +10,21 @@ jobs:
 
     services:
       postgres:
-        image: postgres:latest
-        ports: ['5432:5432']
+        image: postgres:15
+        ports:
+          - 5432:5432
         env:
+          POSTGRES_DB: postgres
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          RAILS_ENV: test
+          # RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-          POSTGRES_DATABASE: postgres
           POSTGRES_HOST: localhost
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: Checkout code
@@ -32,26 +38,19 @@ jobs:
         run: |
           bundle install
 
-      - name: Setup Database
-        env:
-          RAILS_ENV: test
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-          POSTGRES_DATABASE: postgres
-          POSTGRES_HOST: localhost
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        run: |
-          bin/rails db:create
-          bin/rails db:schema:load
+      # - name: Setup Database
+      #   env:
+      #     RAILS_ENV: test
+      #     RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      #     # POSTGRES_DATABASE: postgres
+      #     POSTGRES_HOST: localhost
+      #     POSTGRES_USER: postgres
+      #     POSTGRES_PASSWORD: postgres
+      #   run: |
+      #     bin/rails db:create
+      #     bin/rails db:schema:load
 
       - name: Run RSpec Tests
-        env:
-          RAILS_ENV: test
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-          PPOSTGRES_DATABASE: postgres
-          PPOSTGRES_HOST: localhost
-          PPOSTGRES_USER: postgres
-          PPOSTGRES_PASSWORD: postgres
         run: bundle exec rspec
 
       # - name: Deploy
