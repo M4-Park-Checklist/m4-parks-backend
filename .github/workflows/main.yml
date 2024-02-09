@@ -41,7 +41,6 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         run: |
-          sudo systemctl start postgresql.service
           bin/rails db:create
           bin/rails db:schema:load
 
