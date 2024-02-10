@@ -1,9 +1,9 @@
 name: m4-parks-be
 on:
   pull_request:
-    branches: [ci_test_base, main]
+    branches: [main]
   push:
-    branches: [ci_test_base, main]
+    branches: [main]
 
 jobs:
   test:
@@ -38,25 +38,12 @@ jobs:
         run: bin/rails db:schema:load
       - name: Run RSpec Tests
         run: bundle exec rspec
-
-      # - name: Setup Database
-      #   env:
-      #     RAILS_ENV: test
-      #     RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      #     # POSTGRES_DATABASE: postgres
-      #     POSTGRES_HOST: localhost
-      #     POSTGRES_USER: postgres
-      #     POSTGRES_PASSWORD: postgres
-      #   run: |
-      #     bin/rails db:create
-      #     bin/rails db:schema:load
-
-
-      # - name: Deploy
-      #   # Only run this step if the branch is main
-      #   if: github.ref == 'refs/heads/main'
-      #   env:
-      #     deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-      #   run: |
-      #     curl "$deploy_url"
-  #comment
+  deploy:
+      - name: Deploy
+        needs: test
+        # Only run this step if the branch is main
+        if: github.ref == 'refs/heads/main'
+        env:
+          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          curl "$deploy_url"
