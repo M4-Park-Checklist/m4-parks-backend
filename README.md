@@ -3,8 +3,8 @@
 NPS Service is an API that provides details on all US national parks, preserves, monuments, memorials, historic sites, seashores, and national battlefield parks. 
 
 The project follows service-oriented architecture (SOA) and is divided into two different repositories:
-- [NPS Service back-end]()
-- [NPS Service front-end]()
+- [NPS Service back-end](https://github.com/M4-Park-Checklist/m4-parks-backend)
+- [NPS Service front-end](https://github.com/M4-Park-Checklist/m4-parks-frontend)
 
 NPS Service API fits into our projects SOA by providing the endpoint and backend logic that allows us to easily connect to any given front end service as a way of being able to quickly adapt.
 
@@ -36,8 +36,8 @@ Requirements for the software and other tools to build, test and push
 ### Installing
 
 - Fork and clone these repos
-  - [FasTracks-Frontend](https://github.com/FasTracks/FasTracks-FE) 
-  - [FasTracks-Backend](https://github.com/FasTracks/FasTracks-BE) (you are here)
+- [NPS Service back-end](https://github.com/M4-Park-Checklist/m4-parks-backend)
+- [NPS Service front-end](https://github.com/M4-Park-Checklist/m4-parks-frontend) (you are here)
 
 `bundle install`<br>
 `rails db:{create,migrate}`<br>
@@ -62,7 +62,7 @@ Follow commands below to run the app test suite.
 
 ## Deployment
 
-This project is deployed using heroku [here](https://fastracks-62267ab898ea.herokuapp.com/) 
+This project is deployed using render [here](https://m4-parks-backend.onrender.com/) 
 
 
 ## Contributing
@@ -75,9 +75,9 @@ The current version (V1) of our application is live here on github.
 
 ## Authors
   
-  - **Kameron Kennedy** - *[LinkedIn](https://www.linkedin.com/in/kameron-kennedy-pe/), [GitHub](https://github.com/kameronk92)*
-  - **Kameron Kennedy** - *[LinkedIn](https://www.linkedin.com/in/kameron-kennedy-pe/), [GitHub](https://github.com/kameronk92)*
-  - **Kameron Kennedy** - *[LinkedIn](https://www.linkedin.com/in/kameron-kennedy-pe/), [GitHub](https://github.com/kameronk92)*
+  - **Paul Bennett** - *[LinkedIn](https://www.linkedin.com/in/paul-bennett-dev), [GitHub](https://github.com/pcbennett108)*
+  - **Alexandre Hastings** - *[LinkedIn](https://www.linkedin.com/in/lex-hastings-88798a1b5/), [GitHub](https://github.com/Jesuitman)*
+  - **Joseph Stewart** - *[LinkedIn](https://www.linkedin.com/in/joe-stewart-1b1a97114/), [GitHub](https://github.com/JoeyStewart)*
   - **Kameron Kennedy** - *[LinkedIn](https://www.linkedin.com/in/kameron-kennedy-pe/), [GitHub](https://github.com/kameronk92)*
 
 ## License
@@ -86,5 +86,5 @@ This project is not licensed and is open source.
 
 ## Acknowledgments
 
-  - Technical direction and consultation provded by [Jamison Ordway](https://github.com/jamisonordway) and [Chris Simmons](https://github.com/cjsim89)
+  - Technical direction and consultation provded by [Jeremiah Black](https://github.com/jeremiahblackol)
   - This project completed by Mod 3 students at [Turing School of Software and Design](https://turing.edu/)
