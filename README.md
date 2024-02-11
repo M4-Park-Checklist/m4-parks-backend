@@ -21,6 +21,8 @@ If you would like to run the application locally, you will need Rails 7.X.X and 
 
 Then, in your browser, visit `localhost:3000` and follow the prompts on screen. 
 
+Response samples are available in the `request_samples` directory. 
+
 ### Prerequisites
 
 We recommend a basic understanding of the following concepts before diving in to our code:
