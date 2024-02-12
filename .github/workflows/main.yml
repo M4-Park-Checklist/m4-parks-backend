@@ -39,8 +39,11 @@ jobs:
       - name: Run RSpec Tests
         run: bundle exec rspec
   deploy:
-        needs: test
-        name: Deploy
+    runs-on: ubuntu-latest
+    needs: test
+    name: Deploy
+    steps:
+      uses: actions/checkout@v3
         # Only run this step if the branch is main
         if: github.ref == 'refs/heads/main'
         env:
