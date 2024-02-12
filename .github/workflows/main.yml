@@ -45,6 +45,7 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v3
         # Only run this step if the branch is main
+      - name: Deploy to Render
         if: github.ref == 'refs/heads/main'
         env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
