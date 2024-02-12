@@ -7,11 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "http://localhost:3000",
-            "http://127.0.0.1:3000",
-            "https://m4-parks-backend.onrender.com"
-            "https://m4-parks-frontend.vercel.app/"
-            "https://m4-parks-frontend-omq5.vercel.app/"
+    origins "*"
 
             # "http://yourwebsite.production.app" frontend deploy URL
 
