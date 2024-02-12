@@ -1,21 +1,46 @@
-# .github/workflows/ci.yml
-
+name: m4-parks-be
 on:
   pull_request:
+    branches: [main]
   push:
     branches: [main]
 
 jobs:
-  ci:
+  test:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      # - name: Test
-      #   run: |
-      #     npm install
-      #     npm run test
+    services:
+      postgres:
+        image: postgres:11-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
 
+    env:
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+        with:
+          bundler-cache: true
+          # ruby-version: 3.2.2
+      - name: Install Gems
+        run: |
+          bundle install
+      - name: Set up database schema
+        run: bin/rails db:schema:load
+      - name: Run RSpec Tests
+        run: bundle exec rspec
+  deploy:
       - name: Deploy
+        needs: test
         # Only run this step if the branch is main
         if: github.ref == 'refs/heads/main'
         env:
