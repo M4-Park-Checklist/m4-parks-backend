@@ -1,7 +1,8 @@
 class WeatherFacade
   def self.get_forecast(park_code)
-    address = ParkService.get_park(park_code)
-    require 'pry'; binding.pry
-    WeatherService.get_forecast(address)
+    park = ParkService.get_park(park_code)
+
+    location = park[:data][0][:addresses]
+    forecast = Forecast.new(WeatherService.get_weather(location))
   end
 end

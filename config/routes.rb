@@ -10,4 +10,5 @@ Rails.application.routes.draw do
 
   get '/api/v0/parks', to: 'api/v0/parks#index'
   get '/api/v0/parks/:id', to: 'api/v0/parks#show'
+  get '/api/v0/weather/:id', to: 'api/v0/weathers#show'
 end
