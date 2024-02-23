@@ -4,6 +4,7 @@ class WeatherService
       faraday.params['location'] = "#{addresses[0][:city]},#{addresses[0][:stateCode]}"
     end
     response = conn.get('/api/v0/forecast/')
-    parsed = JSON.parse(response.body, symbolize_names: true)
+    
+    JSON.parse(response.body, symbolize_names: true)
   end
 end
