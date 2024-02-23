@@ -1,0 +1,21 @@
+{:data=>
+  {:id=>nil,
+   :type=>"weather",
+   :attributes=>
+    {:id=>nil,
+     :forecast=>
+      [{:date=>"2024-02-23", :sunrise=>"07:10 AM", :sunset=>"06:03 PM", :max_temp=>29.5, :min_temp=>2.4, :condition=>"Light snow", :icon=>"//cdn.weatherapi.com/weather/64x64/day/326.png"},
+       {:date=>"2024-02-24",
+        :sunrise=>"07:08 AM",
+        :sunset=>"06:04 PM",
+        :max_temp=>33.0,
+        :min_temp=>6.1,
+        :condition=>"Light freezing rain",
+        :icon=>"//cdn.weatherapi.com/weather/64x64/day/311.png"},
+       {:date=>"2024-02-25",
+        :sunrise=>"07:07 AM",
+        :sunset=>"06:05 PM",
+        :max_temp=>34.7,
+        :min_temp=>14.6,
+        :condition=>"Light freezing rain",
+        :icon=>"//cdn.weatherapi.com/weather/64x64/day/311.png"}]}}}
