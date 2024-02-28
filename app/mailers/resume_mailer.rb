@@ -9,7 +9,7 @@ class ResumeMailer < ApplicationMailer
     mail( 
       to: email,
       subject: "some fire resumes",
-      from: "roosevelt@nationalparks.gov"
+      from: "nationalparksserviceservice@gmail.com"
     )
   end
 end
