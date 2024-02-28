@@ -8,7 +8,7 @@ RSpec.describe ResumeMailer, type: :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("some fire resumes")
       expect(mail.to).to eq(["fake@domain.com"])
-      expect(mail.from).to eq(["roosevelt@nationalparks.gov"])
+      expect(mail.from).to eq(["nationalparksserviceservice@gmail.com"])
     end
 
     it "renders the body" do
