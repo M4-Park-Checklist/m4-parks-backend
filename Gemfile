@@ -17,6 +17,9 @@ gem "puma", ">= 5.0"
 # JSON Serializer
 gem "jsonapi-serializer"
 
+# Use Skylight for performance metrics and error tracking [https://www.skylight.io]
+gem "skylight"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
